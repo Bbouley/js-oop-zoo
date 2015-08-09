@@ -14,55 +14,68 @@ describe('Zoo', function(){
 
   describe('#changeLocation', function(){
     it('should change locations', function(){
-      // add spec
+      expect(zoo.changeLocation('Kensington, London')).toEqual('Kensington, London');
     });
   });
 
   describe('#open', function(){
     it('should change status to open', function(){
-      // add spec
+      expect(zoo.open()).toEqual('open');
     });
   });
 
 
   describe('#isOpen', function(){
     it('should see if the zoo is open', function(){
-      // add spec
+      expect(zoo.isOpen()).toEqual('Closed!');
     });
     it('should see if the zoo is closed', function(){
-      // add spec
+      zoo.open();
+      expect(zoo.isOpen()).toEqual('Open!');
     });
   });
 
   describe('#animals', function(){
     it('should initially be empty', function(){
-      // add spec
+     expect(zoo.animals).toEqual([]);
     });
   });
 
 
   describe('#addAnimal', function(){
     it('should only add an animal to the animals array when the zoo is open', function(){
-      // add spec
+      expect(zoo.addAnimal()).toEqual('Zoo is closed!');
     });
     it('should add an animal to the animals array', function(){
-      // add spec
+      zoo.open();
+      zoo.addAnimal(pig);
+      expect(zoo.animals.length).toEqual(1);
     });
 
     it('should only add instances of animals', function(){
-      // add spec
+      zoo.open();
+      expect(zoo.addAnimal('Richard')).toEqual('That\'s not an animal!');
     });
 
     it('should not add duplicates', function(){
-      // add spec
+      zoo.open();
+      zoo.addAnimal(pig);
+      expect(zoo.addAnimal(pig)).toEqual('That animal\'s already here!');
     });
   });
 
   describe('#removeAnimal', function(){
     it('should remove an animal from the animals array if the zoo is open', function(){
-      // add spec
+      expect(zoo.removeAnimal()).toEqual('Zoo is Closed!');
+      zoo.open();
+      expect(zoo.removeAnimal()).toEqual('That animal\'s not here!');
+      zoo.addAnimal(pig);
+      zoo.addAnimal(lion);
+      zoo.removeAnimal(pig);
+      expect(zoo.animals.length).toEqual(1);
     });
   });
+
 });
 
 
